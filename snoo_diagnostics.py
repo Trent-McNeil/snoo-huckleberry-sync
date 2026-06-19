@@ -309,7 +309,7 @@ async def main():
                         body = await resp.text()
                         print(f"    Error body: {body[:400]}")
                     else:
-                        raw = await resp.json()
+                        raw = await resp.json(content_type=None)
                         # PubNub v2 history with include_token=true:
                         # [[{"message": {...}, "timetoken": "..."}, ...], start_tt, end_tt]
                         # Without include_token: [[msg1, msg2, ...], start_tt, end_tt]

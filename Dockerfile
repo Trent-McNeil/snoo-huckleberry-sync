@@ -21,4 +21,4 @@ USER appuser
 
 VOLUME /data
 
-CMD [".venv/bin/python", "-m", "sync.runner", "--loop"]
+CMD ["uv", "run", "python", "-m", "sync.runner", "--loop"]

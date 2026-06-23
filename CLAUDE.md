@@ -34,7 +34,7 @@ There are no tests or linter configs in this project.
 - **Session start back-computation**: SNOO reports `since_session_start_ms` (elapsed) and `event_time_ms` (timestamp); start = `event_time_ms - since_session_start_ms`.
 - **`is_active_session` is a string**: the SNOO API returns `"true"`/`"false"` (not a JSON bool); `snoo_source.py` handles the coercion.
 - **Reauth task cancellation**: `python-snoo` schedules a background reauth task; it is cancelled immediately after the device fetch because the aiohttp session is torn down after each pass.
-- **`DRY_RUN=true` is the default**: nothing is written to Huckleberry until explicitly set to `false`.
+- **`DRY_RUN=false` is the default**: sessions are written to Huckleberry. Set `DRY_RUN=true` to log-only mode.
 - **Idempotency**: `DedupeStore.seen()` guards against double-writes; `DedupeStore.mark()` is called atomically after a successful Firestore write.
 
 ### Data volume

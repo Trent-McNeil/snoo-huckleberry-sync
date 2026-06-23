@@ -14,9 +14,9 @@ End times are approximated from the last poll that saw the session active, so th
 
 1. Copy `.env.example` to `.env` and fill in your credentials.
 
-2. Run with `DRY_RUN=true` first and check the logs. You should see `WOULD WRITE` lines after a session ends.
+2. Deploy the stack. Sessions will be written to Huckleberry automatically.
 
-3. Once the times look correct, set `DRY_RUN=false` and redeploy.
+3. To verify before writing, set `DRY_RUN=true` and check the logs for `WOULD WRITE` lines.
 
 **docker-compose.yml** (paste into Portainer -> Stacks -> Add stack):
 
@@ -59,12 +59,12 @@ uv run python -m sync.runner --loop
 | `HUCKLEBERRY_TIMEZONE` | No | `America/New_York` | Your local timezone (e.g. `Europe/London`) |
 | `HUCKLEBERRY_CHILD_UID` | No | auto-detected | Override if auto-detection picks the wrong child |
 | `INTERVAL_MINUTES` | No | `15` | How often to poll the SNOO |
-| `DRY_RUN` | No | `true` | Log intended writes without touching Huckleberry |
+| `DRY_RUN` | No | `false` | Log intended writes without touching Huckleberry |
 | `DB_PATH` | No | `/data/dedupe.sqlite` | Path to the SQLite dedupe store |
 
 ## Safety
 
 - Never writes to SNOO. All SNOO access is read-only (HTTP GET only).
-- `DRY_RUN=true` by default. The tool will not write anything to Huckleberry until you explicitly set `DRY_RUN=false`.
+- Set `DRY_RUN=true` to log intended writes without touching Huckleberry.
 - Sessions shorter than 60 seconds are discarded as noise.
 - The SQLite dedupe store ensures each session is written to Huckleberry exactly once, even if the container restarts mid-session.

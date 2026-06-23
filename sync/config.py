@@ -31,5 +31,5 @@ HUCKLEBERRY_TIMEZONE: str = os.environ.get("HUCKLEBERRY_TIMEZONE", "America/New_
 HUCKLEBERRY_CHILD_UID: str | None = os.environ.get("HUCKLEBERRY_CHILD_UID") or None
 
 INTERVAL_MINUTES: float = _float("INTERVAL_MINUTES", 15.0)
-DRY_RUN: bool = _bool("DRY_RUN", True)
+DRY_RUN: bool = _bool("DRY_RUN", False)
 DB_PATH: str = os.environ.get("DB_PATH", "/data/dedupe.sqlite")
